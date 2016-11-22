@@ -92,4 +92,64 @@ class JavaFile < ActiveRecord::Base
 		end
 	end
 
+	def spens
+		key_words = %w{
+			print printf println next System Arrays String
+			Scanner abstract continue for new switch
+			assert default goto package synchronized
+			boolean do if private this
+			break double implements protected throw
+			byte else import public throws
+			case enum instanceof return transient
+			catch extends int short try
+			char final interface static void
+			class finally long strictfp volatile
+			const float native super while true false 
+		}
+		replace_content = content.clone
+		key_words.each { |key| replace_content.gsub!(key, '') }
+		words = replace_content.scan(/[a-zA-Z_]+[0-9]*/)
+		counts = Hash.new(0)
+		words.each { |word| counts[word] += 1 }
+		counts.each { |k, v| counts[k] -= 1 }
+		counts.delete_if { |k, v| v <= 0 }
+		counts
+	end
+
+	def sum_spens
+		count = spens
+		sum = 0
+		count.each_value { |v| sum += v }
+		sum
+	end
+
+	def chepins_metric
+		role = role_chepins_metric
+		count = []
+		role.each { |k, v| count << v.count}
+		metric = count[0] + 2 * count[1] + 3 * count[2] + 0.5 * count[3]
+	end
+
+	def role_chepins_metric
+		role = { 'p' => [], 'm' => [], 'c' => [], 't' => [] }
+		pr = content.scan(/println\(.+\)/)
+		pr.map! { |x| x.gsub!(/println\(/, '').gsub!(/\)/, '') }
+		pr.map! { |x| x.split(/,\s+/) }.flatten!
+		pr.each { |i| role[select_role(i)] << i }
+		sc = content.scan(/.*=.*next/)
+		sc.map! { |x| x.gsub(/=.*/, '').split(' ').last }
+		sc.each { |i| role[select_role(i, true)] << i }
+		role
+	end
+
+	def select_role(i, input = false)
+		condition = content.scan(/(\bif\b|\bfor\b|\bwhile\b|\bcase\b)(.\(.*\))/)
+		condition.map! { |x| x[1] }
+		condition.each { |x| return 'c' if x.scan(/\b#{i}\b/).count > 0 }
+		write = content.scan(/(.*)=(.*);/)
+		write.each { |x| return 'm' if x[0].scan(/\b#{i}\b/).count > 0 }
+		write.each { |x| return 'p' if x[1].scan(/\b#{i}\b/).count > 0 || input}
+		return 't'
+	end
+
 end

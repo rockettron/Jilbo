@@ -1,4 +1,6 @@
-for (int i = 0; i < 2; i++) {
+int n = next()
+int p = next()
+for (int i = 0; i < n; i++) {
     for (int j = 0; j < 13; j++) {
         for (int k = 1; k <= 26; k++) {
             boolean find = false;
@@ -32,4 +34,5 @@ for (int k = 0; k < 2; k++) {
     }
     int sh = i;
     int sw = t;
+    println(i, sh, sw)
 }
