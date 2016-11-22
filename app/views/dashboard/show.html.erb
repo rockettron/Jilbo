@@ -1,0 +1,24 @@
+<div class = "table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th># </th>
+				<th>Title </th>
+				<th>Абсолютная сложность</th>
+				<th>Максимальный уровень вложенности</th>
+				<th>Относительная сложность</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%= @java_file.id %></td>
+				<td><%= File.basename(@java_file.path_file) %></td>
+				<td><%= @java_file.count_operators %></td>
+				<td><%= @java_file.deepness %></td>
+				<td><%= @java_file.cl %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<%- code = @java_file.content %>
+<pre><%= Simplabs::Highlight.highlight(:java, code).html_safe %></pre>
