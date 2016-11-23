@@ -1,0 +1,36 @@
+h3 Jilbo metrics
+
+.table-responsive
+	table.table
+		thead
+			tr
+				th #
+				th Title
+				th Абсолютная сложность
+				th Максимальный уровень вложенности
+				th Относительная сложность
+		tbody
+			- @java_files.each_with_index do |item, i|
+				tr
+					td = i + 1
+					td
+						a href=jilbo_path(item) = File.basename(item.path_file) + '  #id = ' + item.id.to_s
+					td = item.count_operators
+					td = item.deepness
+					td = item.cl
+
+.center-block
+	h4 Add file
+	= form_for @java_file, url: upload_jilbo_index_path, method: :post, multipart: true, html: { class: "form-horizontal" } do |f|
+		= render 'errors_messages'
+	
+		.form_group
+			= f.label "Compilible?", class: "col-xs-2"
+			= f.check_box :compile
+		
+		.form_group
+			= f.label :file, class: "col-xs-2"
+			= f.file_field :path_file, reqiured: true
+		
+		.form_group	
+			= f.submit "Send", class: "btn btn-default"

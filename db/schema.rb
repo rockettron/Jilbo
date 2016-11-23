@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025120428) do
+ActiveRecord::Schema.define(version: 20161123002921) do
 
   create_table "java_files", force: :cascade do |t|
     t.string   "path_file"
@@ -20,8 +20,12 @@ ActiveRecord::Schema.define(version: 20161025120428) do
     t.integer  "count_operators"
     t.float    "cl"
     t.integer  "deepness"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "chep",            default: false
+    t.integer  "spens"
+    t.string   "role"
+    t.float    "chep_metric"
   end
 
 end

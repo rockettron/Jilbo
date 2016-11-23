@@ -1,0 +1,28 @@
+.table-responsive
+	table.table
+		thead
+			tr
+				th #
+				th Title
+				th P
+				th M
+				th C
+				th T
+				th Q
+				th Spens
+		tbody
+			- item = @java_file
+			- hash = JSON.parse(item.role)
+			tr
+				td = item.id
+				td
+					a href=chep_path(item) = File.basename(item.path_file) + '  #id = ' + item.id.to_s
+				td = hash['p']
+				td = hash['m']
+				td = hash['c']
+				td = hash['t']
+				td = item.chep_metric
+				td = item.spens
+
+- code = @java_file.content 
+pre = Simplabs::Highlight.highlight(:java, code).html_safe

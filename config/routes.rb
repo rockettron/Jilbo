@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'dashboard#home'
+  resources :jilbo, only: [:index, :show] do
+    post 'upload', on: :collection
+  end
+  resources :chep, only: [:index, :show] do
+    post 'upload', on: :collection
+  end
   post 'upload' => 'dashboard#upload', as: :upload
-  get 'show/:id' => 'dashboard#show', as: :show
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

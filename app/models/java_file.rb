@@ -2,14 +2,16 @@ class JavaFile < ActiveRecord::Base
 	
 	validate :check_content
 
-	after_create :add_content, :create_answer
+	after_create :add_content, :create_answer, :create_chep
 
 	OPERATORS = %w(+= -= *= /= %= &= |= ^= <<= >>= >>>= ++ -- ! == != >= <= > < && || instanceof ~ << >> >>> & | ^ = + - * / %)
 
 	def prepare_code
-		source = content.clone
-		source.gsub!(/(["])(?:(?=(\\?))\2.)*?\1/, '')
-		source.gsub!(/(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)|(\/\/.*)/, '')
+		
+		src = content.clone
+		src.gsub!(/(["])(?:(?=(\\?))\2.)*?\1/, '')
+		src.gsub!(/(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)|(\/\/.*)/, '')
+		src
 	end
 
 	def find_conditions
@@ -30,20 +32,20 @@ class JavaFile < ActiveRecord::Base
 
 	def ifelse_count_operators
 		res = 0
-		source = prepare_code
+		src = prepare_code
 		OPERATORS.each do |op|
-			res += source.scan(op).size
-			source.gsub!(op, '')
+			res += src.scan(op).size
+			src.gsub!(op, '')
 		end
 		res
 		# content.scan(/;/).size
 	end
 
 	def count_deepness
-		source = prepare_code
-		switch_case_replacer(source)
+		src = prepare_code
+		switch_case_replacer(src)
 		deepness = balance = 0
-		source.each_line do |line|
+		src.each_line do |line|
 			line.each_char do |chr|  
 				balance += 1 if chr == '{'
 				balance -= 1 if chr == '}'
@@ -57,8 +59,8 @@ class JavaFile < ActiveRecord::Base
 
 	private 
 
-	def switch_case_replacer(source)
-		source.gsub!(/\bswitch\b[^{]*{[^}]*/) do |match|  
+	def switch_case_replacer(src)
+		src.gsub!(/\bswitch\b[^{]*{[^}]*/) do |match|  
 			kol = "}" * (match.scan(/(\bcase\b)|(\bdefault\b)/).size.to_i - (match.include?('default') ? 2 : 1))
 			match.gsub!(/\bswitch\b/, '}')
 			match.gsub!(/\bcase\b/, '} else { if {')
@@ -79,6 +81,13 @@ class JavaFile < ActiveRecord::Base
 		self.save!
 	end
 
+	def create_chep
+		self.spens = sum_spens
+		self.role = role_chepins_metric.to_json.to_s
+		self.chep_metric = chepins_metric
+		self.save!
+	end
+
 	def check_content
 		return true unless compile
 		errors_path = Rails.root.join(File.dirname(path_file), 'errors.txt').to_s
@@ -92,7 +101,7 @@ class JavaFile < ActiveRecord::Base
 		end
 	end
 
-	def spens
+	def spens_hash
 		key_words = %w{
 			print printf println next System Arrays String
 			Scanner abstract continue for new switch
@@ -117,7 +126,7 @@ class JavaFile < ActiveRecord::Base
 	end
 
 	def sum_spens
-		count = spens
+		count = spens_hash
 		sum = 0
 		count.each_value { |v| sum += v }
 		sum
