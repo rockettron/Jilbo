@@ -1,5 +1,5 @@
-int n = next()
-int p = next()
+int n = next();
+int p = next();
 for (int i = 0; i < n; i++) {
     for (int j = 0; j < 13; j++) {
         for (int k = 1; k <= 26; k++) {

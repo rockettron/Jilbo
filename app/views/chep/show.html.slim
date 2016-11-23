@@ -23,6 +23,18 @@
 				td = hash['t']
 				td = item.chep_metric
 				td = item.spens
-
+	b Spens
+	table.table
+		thead
+			- hash_spens = item.send(:spens_hash)	
+			tr
+				- hash_spens.each_key { |k| 
+				th = k 
+				- }
+		tbody
+			tr
+				- hash_spens.each_value { |v| 
+				td = v 
+				- }
 - code = @java_file.content 
 pre = Simplabs::Highlight.highlight(:java, code).html_safe

@@ -103,7 +103,7 @@ class JavaFile < ActiveRecord::Base
 
 	def spens_hash
 		key_words = %w{
-			print printf println next System Arrays String
+			println printf print next System Arrays String
 			Scanner abstract continue for new switch
 			assert default goto package synchronized
 			boolean do if private this
@@ -115,7 +115,7 @@ class JavaFile < ActiveRecord::Base
 			class finally long strictfp volatile
 			const float native super while true false 
 		}
-		replace_content = content.clone
+		replace_content = prepare_code
 		key_words.each { |key| replace_content.gsub!(key, '') }
 		words = replace_content.scan(/[a-zA-Z_]+[0-9]*/)
 		counts = Hash.new(0)
@@ -140,23 +140,25 @@ class JavaFile < ActiveRecord::Base
 	end
 
 	def role_chepins_metric
+		new_content = prepare_code
 		role = { 'p' => [], 'm' => [], 'c' => [], 't' => [] }
-		pr = content.scan(/println\(.+\)/)
+		pr = new_content.scan(/println\(.+\)/)
 		pr.map! { |x| x.gsub!(/println\(/, '').gsub!(/\)/, '') }
 		pr.map! { |x| x.split(/,\s+/) }.flatten!
 		pr.each { |i| role[select_role(i)] << i }
-		sc = content.scan(/.*=.*next/)
+		sc = new_content.scan(/.*=.*next/)
 		sc.map! { |x| x.gsub(/=.*/, '').split(' ').last }
 		sc.each { |i| role[select_role(i, true)] << i }
 		role
 	end
 
 	def select_role(i, input = false)
-		condition = content.scan(/(\bif\b|\bfor\b|\bwhile\b|\bcase\b)(.\(.*\))/)
+		new_content = prepare_code
+		condition = new_content.scan(/(\bif\b|\bfor\b|\bwhile\b|\bswitch\b)(.\(.*\))/)
 		condition.map! { |x| x[1] }
 		condition.each { |x| return 'c' if x.scan(/\b#{i}\b/).count > 0 }
-		write = content.scan(/(.*)=(.*);/)
-		write.each { |x| return 'm' if x[0].scan(/\b#{i}\b/).count > 0 }
+		write = new_content.scan(/(.*)=(.*);/)
+		write.each { |x| return 'm' if !x[1].include?('next') && x[0].scan(/\b#{i}\b/).count > 0 }
 		write.each { |x| return 'p' if x[1].scan(/\b#{i}\b/).count > 0 || input}
 		return 't'
 	end
