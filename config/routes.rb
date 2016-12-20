@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :chep, only: [:index, :show] do
     post 'upload', on: :collection
   end
+  resources :halsted, only: [:index, :show] do
+    post 'upload', on: :collection
+  end
   post 'upload' => 'dashboard#upload', as: :upload
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

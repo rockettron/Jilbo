@@ -4,7 +4,7 @@ class JavaFile < ActiveRecord::Base
 
 	after_create :add_content, :create_chep, :create_answer
 
-	OPERATORS = %w(+= -= *= /= %= &= |= ^= <<= >>= >>>= ++ -- ! == != >= <= > < && || instanceof ~ << >> >>> & | ^ = + - * / %)
+	OPERATORS = %w(+= -= *= /= %= &= |= ^= >>>= <<= >>= ++ -- != == ! >= <= >>> << >> > < && || instanceof ~ & | ^ = + - * / %)
 
 	def prepare_code
 		

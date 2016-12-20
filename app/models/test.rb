@@ -1,8 +1,11 @@
-int n;
+require_relative 'halsted'
+
+str = 'int n;
 int p;
 n = 5;
 p = 2;
-
+char s[];
+s = "dimas";
 for (int i = 0; i < n; i++) {
     for (int j = 0; j < 13; j++) {
         for (int k = 1; k <= 26; k++) {
@@ -25,7 +28,7 @@ for (int i = 0; i < n; i++) {
             }
             if (!find) break;
         }
-    }
+    }s = "dimas";
 }
 for (int k = 0; k < 2; k++) {
     int t;
@@ -39,3 +42,8 @@ for (int k = 0; k < 2; k++) {
     int sw = t;
     println(i, sh, sw);
 }
+'
+
+h = Halsted.create(content: str)
+
+p h

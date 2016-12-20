@@ -1,0 +1,38 @@
+h3 Halsted metrics
+
+.table-responsive
+	table.table
+		thead
+			tr
+				th #
+				th Title
+				th j
+				th 
+					| f
+					sub 1j
+				th i
+				th 
+					| f
+					sub 2i
+		tbody
+			- @java_files.each_with_index do |item, i|
+				tr
+					td = i + 1
+					td
+						a href=halsted_path(item) = File.basename(item.path_file) + '  #id = ' + item.id.to_s
+					td = item.uniq_operators
+					td = item.count_operators
+					td = item.uniq_operands
+					td = item.count_operands
+
+.center-block
+	h4 Add file
+	= form_for @java_file, url: upload_halsted_index_path, method: :post, multipart: true, html: { class: "form-horizontal" } do |f|
+		= render 'errors_messages'
+		
+		.form_group
+			= f.label :file, class: "col-xs-2"
+			= f.file_field :path_file, reqiured: true
+		
+		.form_group	
+			= f.submit "Send", class: "btn btn-default"

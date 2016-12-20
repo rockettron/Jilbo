@@ -1,0 +1,6 @@
+- if @java_file.errors.any?
+	.alert.alert-danger@alert
+		strong Errors:
+		ul
+			- @java_file.errors.full_messages.each do |msg|
+				li = msg

@@ -1,0 +1,106 @@
+h3
+	strong 
+		| Halsted file : 
+		= File.basename @java_file.path_file
+.row
+	p
+		| Cловарь программы : 
+		strong 
+			| n = 
+			= a = @java_file.uniq_operators
+			|  + 
+			= b = @java_file.uniq_operands
+			|  = 
+			= c = a + b
+	p
+		| Длина программы : 
+		strong 
+			| N = 
+			= a = @java_file.count_operators
+			|  + 
+			= b = @java_file.count_operands
+			|  = 
+			= d = a + b
+	p 
+		| Объем программы : 
+		strong 
+			| V = 
+			= d
+			|  log
+			sub 2
+			= c
+			|  ~ 
+			= (d * (Math.log(c) / Math.log(2))).round 2
+
+.row
+	.col-sm-8.col-md-6
+		table.table.table-bordered
+			thead
+				tr
+					th j
+					th Operators
+					th 
+						| f
+						sub 1j
+			tbody
+				- puts @java_file.operators
+				- hash_oprs = JSON.parse(@java_file.operators)
+				- num = 1
+				- hash_oprs.each do |key, value|
+					tr
+						td = num
+						- num += 1
+						td = key
+						td = value
+			tfoot
+				tr 
+				 	td 
+				 		strong
+					 		| n
+					 		sub 1
+					 		| =
+					 		= @java_file.uniq_operators
+				 	td
+				 	td 
+				 		strong 
+				 			| N
+				 			sub 1
+				 			| = 
+				 			= @java_file.count_operators
+	.col-sm-8.col-md-6
+		table.table.table-bordered
+			thead
+				tr
+					th i
+					th Operands
+					th 
+						| f
+						sub 2j
+			tbody
+				- puts @java_file.operands
+				- hash_oprs = JSON.parse(@java_file.operands)
+				- num = 1
+				- hash_oprs.each do |key, value|
+					tr
+						td = num
+						- num += 1
+						td = key
+						td = value
+			tfoot
+				tr 
+				 	td 
+				 		strong
+					 		| n
+					 		sub 2
+					 		| =
+					 		= @java_file.uniq_operands
+				 	td
+				 	td 
+				 		strong 
+				 			| N
+				 			sub 2
+				 			| = 
+				 			= @java_file.count_operands
+.row
+	- code = @java_file.content 
+	pre = Simplabs::Highlight.highlight(:java, code).html_safe
