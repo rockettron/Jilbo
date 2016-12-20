@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         ConsoleIO io = new ConsoleIO();
         new Main(io).solve();
         io.close();
@@ -60,6 +60,44 @@ public class Main {
 
         io.writeLine("Greed is good");
     }
+
+	public static void Alaverdy() { 
+			int month = 8;
+        String monthString;
+		  int switcher;/*
+        switch (month) {
+            case 1:  monthString = "January";
+                     break;
+            case 2:  monthString = "February";
+                     break;
+            case 3:  monthString = "March";
+                     break;
+            case 4:  monthString = "April";
+                     break;
+            case 5:  monthString = "May";
+                     break;
+            case 6:  monthString = "June";
+                     break;
+            case 7:  monthString = "July";
+                     break;
+            case 8:  monthString = "August";
+                     break;
+            case 9:  monthString = "September";
+                     break;
+            case 10: monthString = "October";
+                     break;
+            case 11: monthString = "November";
+                     break;
+            default: monthString = "Invalid month";
+                     break;
+        }
+        System.out.println(monthString);
+         */    
+        int year = 2000;
+        int numDays = 0;
+        System.out.println("Number of Days = "
+                           + numDays);
+			}
 }
 
 class ConsoleIO {
@@ -103,15 +141,15 @@ class ConsoleIO {
             if(all[i]>='0' && all[i]<='9'){
                 cur = cur*10+all[i]-'0';
                 have = true;
-            }else if(all[i]=='-') {
+            }else { if(all[i]=='-') {
                 neg = true;
             }
-            else if(have){
+            else { if(have){
                 res[k++] = neg?-cur:cur;
                 cur = 0;
                 have = false;
                 neg = false;
-            }
+            } } }
         }
         if(have)res[k++] = neg?-cur:cur;
         return res;
@@ -126,10 +164,10 @@ class ConsoleIO {
                 if (c >= '0' && c <= '9') {
                     r = r * 10 + c - '0';
                     start = true;
-                } else if (!start && c == '-') {
+                } else { if (!start && c == '-') {
                     start = true;
                     neg = true;
-                } else if (start || c == -1) return neg ? -r : r;
+                } else { if (start || c == -1) return neg ? -r : r; } }
             }
         } catch (Exception ex) {
             return -1;
@@ -145,10 +183,10 @@ class ConsoleIO {
                 if (c >= '0' && c <= '9') {
                     r = r * 10 + c - '0';
                     start = true;
-                } else if (!start && c == '-') {
+                } else { if (!start && c == '-') {
                     start = true;
                     neg = true;
-                } else if (start || c == -1) return neg ? -r : r;
+                } else { if (start || c == -1) return neg ? -r : r; } }
             }
         } catch (Exception ex) {
             return -1;
@@ -163,7 +201,7 @@ class ConsoleIO {
                 if (c!= ' ' && c!= '\r' && c!='\n' && c!='\t') {
                     sb.append((char)c);
                     start = true;
-                } else if (start || c == -1) return sb.toString();
+                } else { if (start || c == -1) return sb.toString(); }
             }
         } catch (Exception ex) {
             return "";

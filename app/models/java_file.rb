@@ -2,7 +2,7 @@ class JavaFile < ActiveRecord::Base
 	
 	validate :check_content
 
-	after_create :add_content, :create_answer, :create_chep
+	after_create :add_content, :create_chep, :create_answer
 
 	OPERATORS = %w(+= -= *= /= %= &= |= ^= <<= >>= >>>= ++ -- ! == != >= <= > < && || instanceof ~ << >> >>> & | ^ = + - * / %)
 
@@ -53,6 +53,7 @@ class JavaFile < ActiveRecord::Base
 			end  
 		end
 		deepness -= 3 if compile
+		deepness -= 1 unless compile
 		deepness = 0 if deepness < 0
 		deepness
 	end
@@ -96,6 +97,7 @@ class JavaFile < ActiveRecord::Base
 		errors_file = File.open(errors_path).read
 		if errors_file != ''
 			errors.add(:File, "Your code is uncompilible")
+			false
 		else 
 			true
 		end
@@ -158,7 +160,7 @@ class JavaFile < ActiveRecord::Base
 		condition.map! { |x| x[1] }
 		condition.each { |x| return 'c' if x.scan(/\b#{i}\b/).count > 0 }
 		write = new_content.scan(/(.*)=(.*);/)
-		write.each { |x| return 'm' if !x[1].include?('next') && x[0].scan(/\b#{i}\b/).count > 0 }
+		write.each { |x| return 'm' if (!x[1].include?('next') && x[0].scan(/\b#{i}\b/).count > 0)}
 		write.each { |x| return 'p' if x[1].scan(/\b#{i}\b/).count > 0 || input}
 		return 't'
 	end

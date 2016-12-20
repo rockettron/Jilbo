@@ -11,6 +11,7 @@ class JilboController < ApplicationController
 
 	def upload
 		@java_file = JavaFile.new
+		@java_files = JavaFile.all.where(chep: false)
 		uploaded_io = java_file_params[:path_file]
 		new_path_file = Rails.root.join('java_files', uploaded_io.original_filename)
 		File.open(new_path_file, 'wb') do |file|

@@ -1,0 +1,82 @@
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+     ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+         ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+                ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:1: error: class, interface, or enum expected
+for (int i = 0; i < n; i++) {
+                       ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:2: error: class, interface, or enum expected
+    for (int j = 0; j < 13; j++) {
+                    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:2: error: class, interface, or enum expected
+    for (int j = 0; j < 13; j++) {
+                            ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:3: error: class, interface, or enum expected
+        for (int k = 1; k <= 26; k++) {
+                        ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:3: error: class, interface, or enum expected
+        for (int k = 1; k <= 26; k++) {
+                                 ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:5: error: class, interface, or enum expected
+            for (int x = -1; x <= 1; x++) {
+            ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:5: error: class, interface, or enum expected
+            for (int x = -1; x <= 1; x++) {
+                             ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:5: error: class, interface, or enum expected
+            for (int x = -1; x <= 1; x++) {
+                                     ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:8: error: class, interface, or enum expected
+                }
+                ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:10: error: class, interface, or enum expected
+                if (nw == 13) {
+                ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:13: error: class, interface, or enum expected
+                        if (k == 26) {
+                        ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:15: error: class, interface, or enum expected
+                            return;
+                            ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:16: error: class, interface, or enum expected
+                        }
+                        ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:18: error: class, interface, or enum expected
+                    }
+                    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:22: error: class, interface, or enum expected
+        }
+        ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:25: error: class, interface, or enum expected
+for (int k = 0; k < 2; k++) {
+                ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:25: error: class, interface, or enum expected
+for (int k = 0; k < 2; k++) {
+                       ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:27: error: class, interface, or enum expected
+    if (i == 1) {
+    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:29: error: class, interface, or enum expected
+    } 
+    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:32: error: class, interface, or enum expected
+    }
+    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:34: error: class, interface, or enum expected
+    int sw = t;
+    ^
+/home/dmitry/Rails/metrolog/Jilbo/java_files/Test (копия).java:35: error: class, interface, or enum expected
+}
+^
+27 errors
