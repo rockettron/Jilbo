@@ -29,6 +29,11 @@ h3 Halsted metrics
 	h4 Add file
 	= form_for @java_file, url: upload_halsted_index_path, method: :post, multipart: true, html: { class: "form-horizontal" } do |f|
 		= render 'errors_messages'
+
+		
+		.form_group
+			= f.label "Compilible?", class: "col-xs-2"
+			= f.check_box :compile
 		
 		.form_group
 			= f.label :file, class: "col-xs-2"

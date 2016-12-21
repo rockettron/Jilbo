@@ -17,7 +17,7 @@ class HalstedController < ApplicationController
 		File.open(new_path_file, 'wb') do |file|
 			file.write(uploaded_io.read)
 		end
-		if @java_file.update(path_file: new_path_file)
+		if @java_file.update(path_file: new_path_file, compile: java_file_params[:compile])
 			redirect_to halsted_path(@java_file)
 		else 
 			render :index
@@ -27,7 +27,7 @@ class HalstedController < ApplicationController
 	private 
 
 	def java_file_params
-		params.require(:halsted).permit(:path_file)
+		params.require(:halsted).permit(:path_file, :compile)
 	end
 
 end

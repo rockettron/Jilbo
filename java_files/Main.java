@@ -64,7 +64,7 @@ public class Main {
 	public static void Alaverdy() { 
 			int month = 8;
         String monthString;
-		  int switcher;/*
+		  int switcher;
         switch (month) {
             case 1:  monthString = "January";
                      break;
@@ -92,7 +92,7 @@ public class Main {
                      break;
         }
         System.out.println(monthString);
-         */    
+         
         int year = 2000;
         int numDays = 0;
         System.out.println("Number of Days = "

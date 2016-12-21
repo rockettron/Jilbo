@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220182451) do
+ActiveRecord::Schema.define(version: 20161221100130) do
 
   create_table "halsteds", force: :cascade do |t|
     t.string  "path_file"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20161220182451) do
     t.integer "uniq_operands"
     t.integer "count_operators"
     t.integer "count_operands"
+    t.boolean "compile"
   end
 
   create_table "java_files", force: :cascade do |t|

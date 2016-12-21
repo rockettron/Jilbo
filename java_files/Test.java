@@ -1,8 +1,12 @@
-int n;
-int p;
-n = 5;
-p = 2;
-
+int n = next();
+int p = next();
+int t1 = next();
+int t2 = 1;
+println(t2);
+t1 = t1 + t2;
+switch (t2) {
+	case: break;
+}
 for (int i = 0; i < n; i++) {
     for (int j = 0; j < 13; j++) {
         for (int k = 1; k <= 26; k++) {
@@ -27,6 +31,10 @@ for (int i = 0; i < n; i++) {
         }
     }
 }
+int k1;
+println(k1);
+int na = 5;
+println(na);
 for (int k = 0; k < 2; k++) {
     int t;
     if (i == 1) {

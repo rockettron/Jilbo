@@ -2,7 +2,23 @@ class Halsted < ActiveRecord::Base
 
 	OPERATORS = %w(+= -= *= /= %= &= |= ^= >>>= <<= >>= ++ -- != == ! >= <= >>> << >> > < && || instanceof return ~ & | ^ = + - * / %)
 
+	validate :check_content
+
 	after_create :add_content, :init
+
+	def check_content
+		return true unless compile
+		errors_path = Rails.root.join(File.dirname(path_file), 'errors.txt').to_s
+		pid = Process.spawn('javac', path_file, err: errors_path)
+		Process.waitpid(pid)
+		errors_file = File.open(errors_path).read
+		if errors_file != ''
+			errors.add(:File, "Your code is uncompilible")
+			false
+		else 
+			true
+		end
+	end
 
 	def add_content
 		self.content = File.open(path_file).read
@@ -82,7 +98,7 @@ class Halsted < ActiveRecord::Base
 		self.operands = hash_opds.to_json.to_s
 		self.uniq_operators = hash_oprs.size
 		self.uniq_operands = hash_opds.size
-		self.count_operators = hash_opds.values.reduce(:+)
+		self.count_operators = hash_oprs.values.reduce(:+)
 		self.count_operands = hash_opds.values.reduce(:+)
 		self.save!
 	end

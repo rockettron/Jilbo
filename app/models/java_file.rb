@@ -2,9 +2,17 @@ class JavaFile < ActiveRecord::Base
 	
 	validate :check_content
 
-	after_create :add_content, :create_chep, :create_answer
+	after_create :add_content, :__create
 
 	OPERATORS = %w(+= -= *= /= %= &= |= ^= >>>= <<= >>= ++ -- != == ! >= <= >>> << >> > < && || instanceof ~ & | ^ = + - * / %)
+
+	def __create
+		if chep 
+			create_chep
+		else 
+			create_answer
+		end
+	end
 
 	def prepare_code
 		
