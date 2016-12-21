@@ -82,7 +82,7 @@ class Halsted < ActiveRecord::Base
 		self.operands = hash_opds.to_json.to_s
 		self.uniq_operators = hash_oprs.size
 		self.uniq_operands = hash_opds.size
-		self.count_operators = hash_opds.values.reduce(:+)
+		self.count_operators = hash_oprs.values.reduce(:+)
 		self.count_operands = hash_opds.values.reduce(:+)
 		self.save!
 	end

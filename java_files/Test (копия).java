@@ -22,7 +22,6 @@ for (int i = 0; i < n; i++) {
         }
     }
 }
-const int na = 5;
 println(na);
 for (int k = 0; k < 2; k++) {
     int t;
